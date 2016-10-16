@@ -4,7 +4,8 @@ myApp.config(['$routeProvider', function($routeProvider){
 
   $routeProvider
     .when('/home', {
-      templateUrl: 'views/home.html'
+      templateUrl: 'views/home.html',
+      controller: 'ninjaController'
     })
     .when('/directory', {
       templateUrl: 'views/directory.html',
@@ -12,6 +13,22 @@ myApp.config(['$routeProvider', function($routeProvider){
     }).otherwise({
       redirectTo: '/home'
     });
+
+}]);
+
+myApp.directive('randomNinja', [function(){
+
+return {
+  restrict: 'E',
+  scope: {
+    ninjas: '=',
+    title: '='
+  },
+  templateUrl: 'views/random.html', 
+  controller: function($scope){
+    $scope.random = Math.floor(Math.random() * 4);
+  }
+};
 
 }]);
 
