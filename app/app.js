@@ -1,4 +1,19 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngRoute']);
+
+myApp.config(['$routeProvider', function($routeProvider){
+
+  $routeProvider
+    .when('/home', {
+      templateUrl: 'views/home.html'
+    })
+    .when('/directory', {
+      templateUrl: 'views/directory.html',
+      controller: 'ninjaController'
+    }).otherwise({
+      redirectTo: '/home'
+    });
+
+}]);
 
 myApp.controller("ninjaController", ['$scope', function($scope) {
 
