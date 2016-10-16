@@ -15,7 +15,7 @@ myApp.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-myApp.controller("ninjaController", ['$scope', function($scope) {
+myApp.controller("ninjaController", ['$scope', '$http', function($scope, $http) {
 
   $scope.removeNinja = function(ninja) {
     var removedNinja = $scope.ninjas.indexOf(ninja);
@@ -41,39 +41,11 @@ myApp.controller("ninjaController", ['$scope', function($scope) {
     $scope.newNinja.belt = "";
     $scope.newNinja.rate = "";
 
-  }
+  };
 
-  $scope.ninjas = [
-    {
-      name: 'yoshi',
-      belt: 'cyan',
-      rate: 50,
-      available: true,
-      thumb: "https://s-media-cache-ak0.pinimg.com/originals/c8/19/85/c8198523f8e7cea98b0bf1434389eb7e.png"
-    },
+  $http.get('data/ninjas.json').success(function(data){
+    $scope.ninjas = data;
+  })
 
-    {
-      name: 'rui',
-      belt: 'red',
-      rate: 30,
-      available: true,
-      thumb: "https://s-media-cache-ak0.pinimg.com/originals/59/62/3d/59623d1fc347324a13a3eb4d4be59a63.png"
-    },
 
-    {
-      name: 'shaun',
-      belt: 'green',
-      rate: 20,
-      available: true,
-      thumb: "https://s-media-cache-ak0.pinimg.com/originals/54/46/58/54465853a2766fcf697e603117020d00.png"
-    },
-
-    {
-      name: 'crystal',
-      belt: 'black',
-      rate: 1000,
-      available: true,
-      thumb: "http://vignette3.wikia.nocookie.net/tmnt2012series/images/8/81/Character-raphael-1.png/revision/latest?cb=20120923190550"
-    },
-  ];
 }]);
