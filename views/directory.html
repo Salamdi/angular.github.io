@@ -3,7 +3,7 @@
     <button ng-click="order = 'belt'">Order by Belt</button>
     <button ng-click="showAll()">Show All</button>
     <input type="text" ng-model="search" placeholder="Search for a ninja"/>
-    <ul>
+    <ul id="ninja-list">
       <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
         <img ng-src="{{ninja.thumb}}" style="margin: -12px 10px 0 0; float: left; width: 50px"  />
         <h3>{{ninja.name}} - {{ninja.rate | currency: "€"}}</h3>

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate']);
 
 myApp.config(['$routeProvider', function($routeProvider){
 
@@ -24,7 +24,9 @@ return {
     ninjas: '=',
     title: '='
   },
-  templateUrl: 'views/random.html', 
+  templateUrl: 'views/random.html',
+  transclude: true,
+  replace: true,
   controller: function($scope){
     $scope.random = Math.floor(Math.random() * 4);
   }
