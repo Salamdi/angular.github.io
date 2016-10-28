@@ -7,6 +7,13 @@ myApp.config(['$routeProvider', function($routeProvider){
       templateUrl: 'views/home.html',
       controller: 'ninjaController'
     })
+    .when('/contact', {
+      templateUrl: 'views/contact.html',
+      controller: 'ContactController'
+    })
+    .when('/contact-success', {
+      templateUrl: 'views/contact-success.html'
+    })
     .when('/directory', {
       templateUrl: 'views/directory.html',
       controller: 'ninjaController'
@@ -36,17 +43,14 @@ return {
 
 myApp.controller("ninjaController", ['$scope', '$http', function($scope, $http) {
 
+  $scope.dataTransfer = {};
+
   $scope.removeNinja = function(ninja) {
     var removedNinja = $scope.ninjas.indexOf(ninja);
-    // $scope.ninjas.splice(removedNinja,1);
-    $scope.ninjas[removedNinja].available = false;
+    $scope.ninjas.splice(removedNinja,1);
+    // $scope.ninjas[removedNinja].available = false;
   };
 
-  $scope.showAll = function() {
-    $scope.ninjas.forEach(function(ninja){
-      ninja.available = true;
-    })
-  };
 
   $scope.addNinja = function() {
     $scope.ninjas.push({
@@ -62,9 +66,27 @@ myApp.controller("ninjaController", ['$scope', '$http', function($scope, $http) 
 
   };
 
-  $http.get('data/ninjas.json').success(function(data){
-    $scope.ninjas = data;
-  })
+  $scope.removeAll = function(){
+    // $scope.ninjas.forEach($scope.removeNinja);
+    var length = $scope.ninjas.length;
+    $scope.ninjas.splice(0, length);
+  }
 
+  if (angular.ninjas) {
+    $scope.ninjas = angular.ninjas;
+  } else {
+    $http.get('data/ninjas.json').success(function(data){
+      $scope.ninjas = data;
+      angular.ninjas = $scope.ninjas;
+    });
+  }
 
 }]);
+
+myApp.controller('ContactController', ['$scope', '$location', function($scope, $location){
+
+  $scope.sendMessage = function(){
+    $location.path('/contact-success')
+  }
+
+}])

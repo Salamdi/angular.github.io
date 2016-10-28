@@ -1,7 +1,6 @@
 <div class="content">
     <button ng-click="order = 'name'">Order by Name</button>
     <button ng-click="order = 'belt'">Order by Belt</button>
-    <button ng-click="showAll()">Show All</button>
     <input type="text" ng-model="search" placeholder="Search for a ninja"/>
     <ul id="ninja-list">
       <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
@@ -17,4 +16,5 @@
       <input type="text" placeholder="rate" ng-model="newNinja.rate" />
       <input type="submit" value="Add new ninja" />
     </form>
+    <a href="" ng-click="removeAll()">Remove all ninjas</a>
 </div>

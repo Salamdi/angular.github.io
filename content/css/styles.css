@@ -61,6 +61,7 @@ main{
 
 .content{
   padding: 20px;
+  overflow: hidden;
 }
 
 .content button,
@@ -101,7 +102,8 @@ main{
   font-size: 22px;
 }
 
-.content input{
+.content input,
+.content textarea{
   width: 90%;
   padding: 10px 5%;
   border-radius: 10px;
@@ -148,9 +150,25 @@ main.ng-enter.ng-enter-active {
 }
 
 #ninja-list li.ng-leave {
-  transition:0.5s linear all;
+  transition:0.2s linear all;
+  transform: translateX(0);
   opacity:1;
 }
 #ninja-list li.ng-leave.ng-leave-active {
+  transform: translateX(-100%);
   opacity:0;
+}
+
+#ninja-list li.ng-leave-stagger {
+  transition-delay: 0.2s;
+  transition-duration: 0;
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+  border: 2px solid pink;
+}
+
+input[disabled="disabled"]{
+  opacity: 0.4;
+  cursor:not-allowed !important;
 }
